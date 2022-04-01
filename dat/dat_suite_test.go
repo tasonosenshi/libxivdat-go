@@ -1,4 +1,4 @@
-package libxivdatgo_test
+package dat_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestLibxivdatGo(t *testing.T) {
+func TestDat(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "LibxivdatGo Suite")
+	RunSpecs(t, "DAT Suite")
 }
