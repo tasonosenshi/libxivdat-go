@@ -1,0 +1,60 @@
+[bytefield]
+----
+(defattrs :bg-green {:fill "#a0ffa0"})
+(defattrs :bg-yellow {:fill "#ffffa0"})
+(defattrs :bg-pink {:fill "#ffb0a0"})
+(defattrs :bg-cyan {:fill "#a0fafa"})
+(defattrs :bg-purple {:fill "#e4b5f7"})
+(defattrs :vertical [:plain {:writing-mode "vertical-rl"}])
+
+(draw-column-headers)
+
+(comment "header row")
+(draw-box "File Type" [{:span 4} {:borders {:left :border-unrelated
+                                            :right :border-related
+                                            :top :border-unrelated
+                                            :bottom :border-related
+}} :bg-green])
+(draw-box 
+    (text nil {}
+        [[{:dy "-.33em"}] "Max File size"]
+        [[{:font-size "xx-small"} {:dy "1.25em"} {:dx "-20ch"}] "(excl. 32B Header/Footer)"]
+    )
+    [{:span 4} :box-related :bg-green {:y 0}]
+)
+(draw-box "Content size" [{:span 4} :box-related :bg-green])
+(draw-box 0 [{:span 4} :box-last :bg-green])
+(draw-box 0xFF [{:next-row-height 120} :box-below :bg-green])
+
+(comment "Sections")
+(dotimes [i 3]
+    (draw-box 
+        (text "Section Type" :vertical)
+        [
+            {:borders {
+                :left :border-unrelated
+                :right :border-related
+                :top :border-unrelated
+                :bottom :border-related
+            }}
+            :bg-purple
+        ]
+    ) 
+    (draw-box 
+        (text "Content Size" :vertical)
+        [
+            {:span 2}
+            {:borders {
+                :left :border-related
+                :right :border-related
+                :top :border-unrelated
+                :bottom :border-related
+            }}
+            :bg-purple
+        ]
+    ) 
+    (draw-gap "Content" [{:box-above-style :box-above-related} :bg-purple])
+)
+(draw-padding 15)
+(draw-bottom)
+----

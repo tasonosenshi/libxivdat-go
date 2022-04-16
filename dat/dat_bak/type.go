@@ -70,6 +70,20 @@ func (dtype Type) From(header uint32) Type {
 	return Unknown
 }
 
+/// Gets the XOR mask used for the contents of a binary DAT file.
+/// The mask is applied to only the file data content, not the header, footer, or padding null bytes.
+/// Returns `None` if the file is of unknown type or does not have a mask.
+///
+/// # Examples
+/// ```rust
+/// use libxivdat::dat_type::{DATType, get_mask_for_type};
+///
+/// let mask = get_mask_for_type(&DATType::Macro).unwrap();
+/// # let mut raw_macro_bytes = [0u8; 1];
+/// for byte in raw_macro_bytes.iter_mut() {
+///    *byte = *byte ^ mask;
+/// }
+/// ```
 func GetMaskForType(fileType Type) (uint8, error) {
 	switch fileType {
 	case RecentTells, Gearset, GoldSaucer, ItemFinder, ItemOrder, Keybind, Macro:
